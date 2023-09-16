@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/home/quran/sura_detailes_screen.dart';
 
 class QuranTab extends StatelessWidget {
-
   List<String> suraNames = [
     "الفاتحة",
     "البقرة",
@@ -138,26 +137,26 @@ class QuranTab extends StatelessWidget {
         ),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context,index){
+            separatorBuilder: (context, index) {
               return Divider(
                 color: Theme.of(context).primaryColor,
                 thickness: 3,
               );
             },
-              itemBuilder: (context, index){
-                return InkWell(
-                  onTap: (){
-                    Navigator.of(context).pushNamed(SuraDetailsScreen.routeName,
-                    arguments: SuraDetailsArgs(name:suraNames[index], index: index)
-                    );
-                  },
-                  child: Text(suraNames[index],
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed(SuraDetailsScreen.routeName,
+                      arguments: SuraDetailsArgs(
+                          name: suraNames[index], index: index));
+                },
+                child: Text(suraNames[index],
                     style: Theme.of(context).textTheme.titleSmall,
                     textAlign: TextAlign.center),
-                );
-              },
+              );
+            },
             itemCount: suraNames.length,
-              ),
+          ),
         ),
       ],
     );

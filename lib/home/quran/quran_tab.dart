@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/home/quran/sura_detailes_screen.dart';
+import 'package:islami_app/my_theme.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/app_config_provider.dart';
 
 class QuranTab extends StatelessWidget {
   List<String> suraNames = [
@@ -120,26 +125,33 @@ class QuranTab extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Column(
       children: [
         Center(child: Image.asset("assets/images/quran_logo.png")),
         Divider(
-          color: Theme.of(context).primaryColor,
+          color: provider.isDarkMode()
+              ? MyTheme.yellowColor
+              : Theme.of(context).primaryColor,
           thickness: 3,
         ),
         Text(
-          "Sura Name",
+          AppLocalizations.of(context)!.sura_name,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Divider(
-          color: Theme.of(context).primaryColor,
+          color: provider.isDarkMode()
+              ? MyTheme.yellowColor
+              : Theme.of(context).primaryColor,
           thickness: 3,
         ),
         Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) {
               return Divider(
-                color: Theme.of(context).primaryColor,
+                color: provider.isDarkMode()
+                    ? MyTheme.yellowColor
+                    : Theme.of(context).primaryColor,
                 thickness: 3,
               );
             },
@@ -151,7 +163,12 @@ class QuranTab extends StatelessWidget {
                           name: suraNames[index], index: index));
                 },
                 child: Text(suraNames[index],
-                    style: Theme.of(context).textTheme.titleSmall,
+                    style: provider.isDarkMode()
+                        ? Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(color: MyTheme.whiteColor)
+                        : Theme.of(context).textTheme.titleSmall,
                     textAlign: TextAlign.center),
               );
             },

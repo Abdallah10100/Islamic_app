@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app/home/hadeth/item_hadeth_name.dart';
+import 'package:provider/provider.dart';
+
+import '../../my_theme.dart';
+import '../../providers/app_config_provider.dart';
 
 class HadethTab extends StatefulWidget {
   @override
@@ -12,6 +17,7 @@ class _HadethTabState extends State<HadethTab> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     if (ahadethList.isEmpty) {
       loadHadethFile();
     }
@@ -19,36 +25,42 @@ class _HadethTabState extends State<HadethTab> {
       children: [
         Center(child: Image.asset("assets/images/hadeth_logo.png")),
         Divider(
-          color: Theme.of(context).primaryColor,
+          color: provider.isDarkMode()
+              ? MyTheme.yellowColor
+              : Theme.of(context).primaryColor,
           thickness: 3,
         ),
         Text(
-          "Hadeth Name",
+          AppLocalizations.of(context)!.hadeth_name,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Divider(
-          color: Theme.of(context).primaryColor,
+          color: provider.isDarkMode()
+              ? MyTheme.yellowColor
+              : Theme.of(context).primaryColor,
           thickness: 3,
         ),
         ahadethList.isEmpty
             ? Center(
-                child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor,
-              ))
+            child: CircularProgressIndicator(
+              color: Theme.of(context).primaryColor,
+            ))
             : Expanded(
-                child: ListView.separated(
-                  itemCount: ahadethList.length,
-                  separatorBuilder: (context, index) {
-                    return Divider(
-                      color: Theme.of(context).primaryColor,
+          child: ListView.separated(
+            itemCount: ahadethList.length,
+            separatorBuilder: (context, index) {
+              return Divider(
+                      color: provider.isDarkMode()
+                          ? MyTheme.yellowColor
+                          : Theme.of(context).primaryColor,
                       thickness: 3,
                     );
-                  },
-                  itemBuilder: (context, index) {
-                    return ItemHadethName(hadeth: ahadethList[index]);
-                  },
-                ),
-              ),
+            },
+            itemBuilder: (context, index) {
+              return ItemHadethName(hadeth: ahadethList[index]);
+            },
+          ),
+        ),
       ],
     );
   }

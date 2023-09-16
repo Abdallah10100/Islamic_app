@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 class MyTheme {
   /// colors,light mode,dark mode
   static Color primaryLight = Color(0xffB7935F);
+  static Color primaryDark = Color(0xff141A2E);
   static Color blackColor = Color(0xff242424);
   static Color whiteColor = Colors.white;
+  static Color yellowColor = Color(0xffFACC1D);
 
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryLight,
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: AppBarTheme(
-      centerTitle: true,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      iconTheme: IconThemeData(
-        color: blackColor,
-      )
-    ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: blackColor,
+        )),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedItemColor: blackColor,
       unselectedItemColor: whiteColor,
@@ -25,9 +26,32 @@ class MyTheme {
       titleLarge: TextStyle(
           fontSize: 30, fontWeight: FontWeight.bold, color: blackColor),
       titleMedium: TextStyle(
-          fontSize: 26, fontWeight: FontWeight.w500, color: blackColor),
+          fontSize: 27, fontWeight: FontWeight.w500, color: blackColor),
       titleSmall: TextStyle(
           fontSize: 25, fontWeight: FontWeight.w300, color: blackColor),
+    ),
+  );
+  static ThemeData darkTheme = ThemeData(
+    primaryColor: primaryDark,
+    scaffoldBackgroundColor: Colors.transparent,
+    appBarTheme: AppBarTheme(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: whiteColor,
+        )),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedItemColor: yellowColor,
+      unselectedItemColor: whiteColor,
+    ),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(
+          fontSize: 30, fontWeight: FontWeight.bold, color: whiteColor),
+      titleMedium: TextStyle(
+          fontSize: 27, fontWeight: FontWeight.w500, color: whiteColor),
+      titleSmall: TextStyle(
+          fontSize: 25, fontWeight: FontWeight.w300, color: yellowColor),
     ),
   );
 }

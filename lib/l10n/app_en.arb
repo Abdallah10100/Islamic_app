@@ -12,5 +12,6 @@
 "light" : "Light",
 "dark" : "Dark",
 "theme" : "Theme",
-"language":"Language"
+"language":"Language",
+"praises":"Number of praises"
 }

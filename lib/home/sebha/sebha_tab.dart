@@ -10,8 +10,7 @@ class SebhaTab extends StatefulWidget {
   State<SebhaTab> createState() => SebhaTabState();
 }
 
-class SebhaTabState extends State<SebhaTab>
-    with SingleTickerProviderStateMixin {
+class SebhaTabState extends State<SebhaTab> {
   int counter = 0;
   int textIndex = 0;
   double angle = 0.01;
@@ -21,7 +20,7 @@ class SebhaTabState extends State<SebhaTab>
     'الله اكبر',
   ];
 
-  void onRosaryPressed() {
+  void onSebhaPressed() {
     setState(() {
       angle += .01;
       counter++;
@@ -52,7 +51,7 @@ class SebhaTabState extends State<SebhaTab>
           Transform.rotate(
             angle: angle,
             child: GestureDetector(
-              onTap: onRosaryPressed,
+              onTap: onSebhaPressed,
               child: provider.isDarkMode()
                   ? Image.asset("assets/images/sebha_body_dark.png")
                   : Image.asset("assets/images/sebha_body.png"),
@@ -90,9 +89,8 @@ class SebhaTabState extends State<SebhaTab>
               child: Text(
                 texts[textIndex],
                 style: Theme.of(context).textTheme.titleMedium,
-                // Hide the text when showText is false
               ),
-            ), // Hide the text when showText is false
+            ),
           ),
         ],
       ),

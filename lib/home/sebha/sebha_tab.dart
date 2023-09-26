@@ -21,22 +21,18 @@ class SebhaTabState extends State<SebhaTab> {
   ];
 
   void onSebhaPressed() {
-    setState(() {
-      angle += .01;
-      counter++;
-      // if (counter % 33 == 0) {
-      //   showText = true;
-      //   textIndex = (counter ~/ 33 - 1) % texts.length;
-      // } else {
-      //   showText = false;
-      // }
-      if (counter == 33) {
-        counter = 0;
-        for (int i = 0; i < 33; i++) {
-          textIndex = (counter ~/ 33 - 1) % texts.length;
-        }
+    if (counter == 33) {
+      if (textIndex == 3) {
+        textIndex = 0;
+      } else {
+        textIndex++;
       }
-    });
+      counter = 0;
+    } else {
+      counter++;
+      angle++;
+    }
+    setState(() {});
   }
 
   @override
@@ -45,17 +41,34 @@ class SebhaTabState extends State<SebhaTab> {
     return Center(
       child: Column(
         children: [
-          // provider.isDarkMode()
-          //     ? Image.asset("assets/images/sebha_head_dark.png")
-          //     : Image.asset("assets/images/sebha_head.png"),
-          Transform.rotate(
-            angle: angle,
-            child: GestureDetector(
-              onTap: onSebhaPressed,
-              child: provider.isDarkMode()
-                  ? Image.asset("assets/images/sebha_body_dark.png")
-                  : Image.asset("assets/images/sebha_body.png"),
-            ),
+          Stack(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  provider.isDarkMode()
+                      ? Image.asset("assets/images/sebha_head_dark.png")
+                      : Image.asset("assets/images/sebha_head.png"),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 75),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Transform.rotate(
+                      angle: angle,
+                      child: GestureDetector(
+                        onTap: onSebhaPressed,
+                        child: provider.isDarkMode()
+                            ? Image.asset("assets/images/sebha_body_dark.png")
+                            : Image.asset("assets/images/sebha_body.png"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 50),
           Text(
